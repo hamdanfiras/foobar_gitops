@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bar-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/hamdanfiras/foobar_gitops.git"
+    targetRevision: HEAD
+    path: charts/bar
+    helm:
+      valueFiles:
+        - values-dev.yaml
+  destination:
+    server: "https://34.148.9.155"
+    namespace: bar-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
