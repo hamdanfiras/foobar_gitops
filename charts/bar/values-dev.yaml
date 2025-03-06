@@ -125,3 +125,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+env:
+  - name: SERVER_PORT
+    value: "8080"
+  # You can add more environment variables here
+  - name: ANOTHER_VAR
+    value: "value"
