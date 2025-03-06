@@ -130,5 +130,5 @@ env:
   - name: SERVER_PORT
     value: "80"
   # You can add more environment variables here
-  - name: ANOTHER_VAR
-    value: "value"
+  - name: FOO_URL
+    value: "http://foo-dev"
