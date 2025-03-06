@@ -13,7 +13,7 @@ spec:
       valueFiles:
         - values-dev.yaml
   destination:
-    server: "https://34.148.9.155"
+    server: "https://kubernetes.default.svc"
     namespace: bar-dev
   syncPolicy:
     automated:
