@@ -15,7 +15,7 @@ spec:
     targetRevision: HEAD
     path: apps/dev
   destination:
-    server: "https://35.222.89.123"
+    server: "https://kubernetes.default.svc"
     namespace: bar-dev
   syncPolicy:
     automated:
