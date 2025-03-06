@@ -40,7 +40,7 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-                    env:
+          env:
           {{- range .Values.env }}
           - name: {{ .name }}
             value: "{{ .value }}"
