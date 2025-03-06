@@ -15,7 +15,7 @@ spec:
     targetRevision: HEAD
     path: apps/dev
   destination:
-    server: "https://34.148.9.155"
+    server: "https://35.222.89.123"
     namespace: bar-dev
   syncPolicy:
     automated:
