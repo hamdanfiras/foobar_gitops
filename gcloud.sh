@@ -7,6 +7,7 @@ zone="us-central1-a"
 
 gcloud config set project $project
 gcloud config set compute/zone $region
+
 # gcloud beta container --project "$project" clusters create-auto "$cluster" --region "us-central1" --release-channel "regular" --tier "standard" --enable-ip-access --no-enable-google-cloud-access --network "projects/$project/global/networks/default" --subnetwork "projects/$project/regions/us-central1/subnetworks/default" --cluster-ipv4-cidr "/17" --binauthz-evaluation-mode=DISABLED
 # gcloud container clusters create "$cluster" \
 #   --project "$project" \
