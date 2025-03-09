@@ -43,7 +43,7 @@ spec:
         - name: ES_JAVA_OPTS
           value: "-Xms1g -Xmx1g" # Adjust JVM heap size as needed
         - name: node.roles
-          value: {{ .Values.esConfig.node.roles | join: "," | quote }}
+          value: "master,data,ingest,ml"
         - name: node.store.allow_mmap
           value: "{{ .Values.esConfig.node.store.allow_mmap }}"
         volumeMounts:
