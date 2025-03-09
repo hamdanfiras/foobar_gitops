@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/hamdanfiras/foobar_gitops.git" # Replace with your repo URL
-    path: charts/elastic-stack # Path to the main helm chart directory
+    path: charts/elastic-stack/elasticsearch # Path to the main helm chart directory
     targetRevision: HEAD
     helm:
       valueFiles:
