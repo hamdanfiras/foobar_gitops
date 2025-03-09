@@ -1,72 +1,73 @@
-
-# charts/elastic-stack/elasticsearch/templates/deployment.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}-elasticsearch
-  labels:
-    app: elasticsearch
-    release: {{ .Release.Name }}
-spec:
-  serviceName: "elasticsearch-headless"
-  replicas: {{ .Values.replicaCount }}
-  selector:
-    matchLabels:
-      app: elasticsearch
-      release: {{ .Release.Name }}
-  template:
-    metadata:
-      labels:
+    name: {{ .Release.Name }}-elasticsearch
+    labels:
         app: elasticsearch
         release: {{ .Release.Name }}
-    spec:
-      containers:
-      - name: elasticsearch
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        resources:
-          {{- toYaml .Values.resources | nindent 8 }}
-        ports:
-        - containerPort: {{ .Values.service.internalPort }}
-          name: http
-        env:
-        - name: cluster.name
-          value: {{ .Values.esConfig.cluster.name }}
-        - name: node.name
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: discovery.seed_hosts
-          value: {{ .Values.esConfig.discovery.seed_hosts | quote }}
-        - name: cluster.initial_master_nodes
-          value: {{ .Values.esConfig.cluster.initial_master_nodes | toJson | quote }}
-        - name: ES_JAVA_OPTS
-          value: "-Xms1g -Xmx1g" # Adjust JVM heap size as needed
-        - name: node.roles
-          value: {{ .Values.esConfig.node.roles }}
-        - name: node.store.allow_mmap
-          value: "{{ .Values.esConfig.node.store.allow_mmap }}"
-        volumeMounts:
-        - name: data
-          mountPath: /usr/share/elasticsearch/data
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: {{ .Values.dataVolume.accessModes }}
-      storageClassName: {{ .Values.dataVolume.storageClassName }}
-      resources:
-        requests:
-          storage: {{ .Values.dataVolume.storage }}
+spec:
+    serviceName: "elasticsearch-headless"
+    replicas: {{ .Values.replicaCount }}
+    selector:
+        matchLabels:
+            app: elasticsearch
+            release: {{ .Release.Name }}
+    template:
+        metadata:
+            labels:
+                app: elasticsearch
+                release: {{ .Release.Name }}
+        spec:
+            securityContext:
+                runAsUser: 1000
+                fsGroup: 1000
+            containers:
+            - name: elasticsearch
+                image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+                imagePullPolicy: {{ .Values.image.pullPolicy }}
+                resources:
+                    {{- toYaml .Values.resources | nindent 8 }}
+                ports:
+                - containerPort: {{ .Values.service.internalPort }}
+                    name: http
+                env:
+                - name: cluster.name
+                    value: {{ .Values.esConfig.cluster.name }}
+                - name: node.name
+                    valueFrom:
+                        fieldRef:
+                            fieldPath: metadata.name
+                - name: discovery.seed_hosts
+                    value: {{ .Values.esConfig.discovery.seed_hosts | quote }}
+                - name: cluster.initial_master_nodes
+                    value: {{ .Values.esConfig.cluster.initial_master_nodes | toJson | quote }}
+                - name: ES_JAVA_OPTS
+                    value: "-Xms1g -Xmx1g" # Adjust JVM heap size as needed
+                - name: node.roles
+                    value: {{ .Values.esConfig.node.roles }}
+                - name: node.store.allow_mmap
+                    value: "{{ .Values.esConfig.node.store.allow_mmap }}"
+                volumeMounts:
+                - name: data
+                    mountPath: /usr/share/elasticsearch/data
+            {{- with .Values.nodeSelector }}
+            nodeSelector:
+                {{- toYaml . | nindent 8 }}
+            {{- end }}
+            {{- with .Values.affinity }}
+            affinity:
+                {{- toYaml . | nindent 8 }}
+            {{- end }}
+            {{- with .Values.tolerations }}
+            tolerations:
+                {{- toYaml . | nindent 8 }}
+            {{- end }}
+    volumeClaimTemplates:
+    - metadata:
+            name: data
+        spec:
+            accessModes: {{ .Values.dataVolume.accessModes }}
+            storageClassName: {{ .Values.dataVolume.storageClassName }}
+            resources:
+                requests:
+                    storage: {{ .Values.dataVolume.storage }}
