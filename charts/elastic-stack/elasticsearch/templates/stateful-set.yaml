@@ -22,7 +22,8 @@ spec:
     spec:
       securityContext:
         runAsUser: 1000
-        runAsGroup: 0
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:  
       - name: elasticsearch
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
