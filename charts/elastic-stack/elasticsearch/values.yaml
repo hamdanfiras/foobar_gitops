@@ -25,9 +25,13 @@ dataVolume:
   accessModes:
     - ReadWriteOnce
 esConfig:
-  node.roles: ["master", "data", "ingest", "ml"]
-  cluster.name: "foobar"
-  discovery.seed_hosts: ["elasticsearch-headless"]
-  cluster.initial_master_nodes:
-    ["elasticsearch-0", "elasticsearch-1", "elasticsearch-2"]
-  node.store.allow_mmap: false #prevent mmap issues in containers.
+  node:
+    roles: "master,data,ingest,ml"
+    store:
+      allow_mmap: false
+  cluster:
+    name: "foobar"
+    initial_master_nodes:
+      ["elasticsearch-0", "elasticsearch-1", "elasticsearch-2"]
+  discovery:
+    seed_hosts: ["elasticsearch-headless"]
