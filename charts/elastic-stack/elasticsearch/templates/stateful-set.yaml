@@ -21,8 +21,8 @@ spec:
         release: {{ .Release.Name }}
     spec:
       securityContext:
-        runAsUser: 0
-        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 0
       containers:  
       - name: elasticsearch
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
