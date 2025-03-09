@@ -75,3 +75,5 @@ kubectl port-forward svc/argocd-server -n argocd 8086:443
 
 
 gcloud container clusters describe foobar --zone $region --format="value(endpoint)"
+
+gcloud container clusters delete foobar --zone us-central1-a
