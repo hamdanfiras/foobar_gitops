@@ -31,7 +31,7 @@ spec:
           name: http
         env:
         - name: cluster.name
-          value: {{ .Values.esConfig.cluster.name }}
+          value: "foobar"
         - name: node.name
           valueFrom:
             fieldRef:
