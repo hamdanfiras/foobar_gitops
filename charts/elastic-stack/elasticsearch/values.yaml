@@ -23,7 +23,7 @@ dataVolume:
   storageClassName: "standard" # Replace with your storage class
   storage: 10Gi
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
 esConfig:
   node:
     roles: "master,data,ingest,ml"
@@ -31,7 +31,8 @@ esConfig:
       allow_mmap: false
   cluster:
     name: "foobar"
-    initial_master_nodes:
-      ["elasticsearch-0", "elasticsearch-1", "elasticsearch-2"]
+    initial_master_nodes: [ "elasticsearch-0", "elasticsearch-1", "elasticsearch-2" ]
   discovery:
-    seed_hosts: ["elasticsearch-headless"]
+    seed_hosts: [ "elasticsearch-headless" ]
+  security:
+    enabled: false

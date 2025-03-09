@@ -1,0 +1,20 @@
+# .gitignore for ArgoCD, Helm, and GitOps project
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Helm files
+*.tgz             # packaged charts
+charts/          # chart dependencies and packaged charts
+.tmp/            # temporary directories
+helm-release/    # release artifacts
+
+# ArgoCD and Kubernetes manifests (if not stored intentionally)
+manifests/       # generated or applied manifests
+*.yaml          # if you generate manifests, adjust as necessary
+
+# Local configuration and sensitive files
+.env
+.env.local
+*.log

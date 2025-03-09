@@ -50,6 +50,8 @@ spec:
           value: {{ .Values.esConfig.node.roles }}
         - name: node.store.allow_mmap
           value: "{{ .Values.esConfig.node.store.allow_mmap }}"
+        - name: xpack.security.enabled
+          value: "{{ .Values.esConfig.security.enabled }}"
         volumeMounts:
         - name: data
           mountPath: /usr/share/elasticsearch/data
