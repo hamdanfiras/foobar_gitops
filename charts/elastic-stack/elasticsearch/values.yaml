@@ -26,7 +26,7 @@ dataVolume:
     - ReadWriteOnce
 esConfig:
   node.roles: ["master", "data", "ingest", "ml"]
-  cluster.name: "my-es-cluster"
+  cluster.name: "foobar"
   discovery.seed_hosts: ["elasticsearch-headless"]
   cluster.initial_master_nodes:
     ["elasticsearch-0", "elasticsearch-1", "elasticsearch-2"]
