@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-logstash-config
+data:
+  logstash.yml: |-
+    {{- .Values.logstashConfig.logstash.yml | nindent 4 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-logstash-pipeline
+data:
+  logstash.conf: |-
+    {{- .Values.logstashPipeline.logstash.conf | nindent 4 }}
