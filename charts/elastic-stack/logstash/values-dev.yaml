@@ -38,7 +38,7 @@ logstashPipeline:
     }
     output {
       elasticsearch {
-        hosts => ["elasticsearch:9200"]
+        hosts => ["elasticsearch-elasticsearch:9200"]
         index => "spring-boot-logs-%{+YYYY.MM.dd}"
       }
       stdout { codec => rubydebug }
