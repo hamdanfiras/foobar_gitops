@@ -18,3 +18,5 @@ manifests/       # generated or applied manifests
 .env
 .env.local
 *.log
+
+temp/
