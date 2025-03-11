@@ -12,4 +12,4 @@ metadata:
   name: {{ .Release.Name }}-logstash-pipeline
 data:
   logstash.conf: |-
-    {{- .Values.logstashPipeline.logstash.conf | nindent 4 }}
+    {{- .Values.logstashPipeline.logstashConf | nindent 4 }}
