@@ -32,8 +32,12 @@ esConfig:
   cluster:
     name: "foobar"
     initial_master_nodes:
-      ["elasticsearch-0", "elasticsearch-1", "elasticsearch-2"]
+      [
+        "elasticsearch-headless-0",
+        "elasticsearch-headless-1",
+        "elasticsearch-headless-2",
+      ]
   discovery:
-    seed_hosts: "elasticsearch-0,elasticsearch-1,elasticsearch-2"
+    seed_hosts: "elasticsearch-headless-0,elasticsearch-headless-1,elasticsearch-headless-2"
   security:
     enabled: false
