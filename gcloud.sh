@@ -60,3 +60,13 @@ kubectl port-forward svc/argocd-server -n argocd 8086:443
 gcloud container clusters describe foobar --zone $region --format="value(endpoint)"
 
 gcloud container clusters delete foobar --zone us-central1-a
+
+
+kubectl port-forward svc/argocd-server -n argocd 8087:443 &
+
+# kubectl port-forward svc/logging-dev 5601:5601
+
+kubectl port-forward service/kibana 8087:5601
+
+
+kubectl port-forward service/kibana 8087:5601 -n logging-dev  &> /dev/null &

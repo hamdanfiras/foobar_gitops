@@ -18,7 +18,7 @@ service:
   port: 5601
 
 env:
-  ELASTICSEARCH_HOSTS: "http://foobar-elasticsearch:9200"
+  ELASTICSEARCH_HOSTS: "http://elasticsearch-elasticsearch:9200"
 
 ingress:
   enabled: false # Change to true if using an Ingress controller
