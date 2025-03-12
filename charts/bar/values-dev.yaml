@@ -129,6 +129,7 @@ affinity: {}
 env:
   - name: SERVER_PORT
     value: "80"
-  # You can add more environment variables here
   - name: FOO_URL
     value: "http://foo-dev"
+  - name: LOGSTASH_URL
+    value: "logstash:5044"

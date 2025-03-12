@@ -27,8 +27,10 @@ gcloud container clusters get-credentials $cluster
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-sleep 2
+exit 0
 
+
+#after
 
 password=$(kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d) && echo "ArgoCD initial admin password: $password"
 
@@ -44,7 +46,7 @@ argocd repo add https://github.com/hamdanfiras/foobar_gitops --username hamdanfi
 kubectl apply -f ./apps/root-dev.yml
 
 
-exit 0
+
 
 # after
 
