@@ -1,6 +1,6 @@
 apiVersion: v2
-name: elasticsearch # Add this line
-description: A Helm chart for Elasticsearch
+name: elasticsearch
+description: A minimal Elasticsearch deployment for Kubernetes
 type: application
 version: 0.1.0
-appVersion: "8.11.1" # Example Elasticsearch version
+appVersion: "7.17.0"

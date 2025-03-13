@@ -1,0 +1,34 @@
+# charts/elastic-stack/elasticsearch/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-elasticsearch
+  labels:
+    app: elasticsearch
+    release: {{ .Release.Name }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.internalPort }}
+    protocol: TCP
+    name: {{ .Values.service.name }}
+  selector:
+    app: elasticsearch
+    release: {{ .Release.Name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-headless
+  labels:
+    app: elasticsearch
+    release: {{ .Release.Name }}
+spec:
+  clusterIP: None
+  selector:
+    app: elasticsearch
+    release: {{ .Release.Name }}
+  ports:
+  - port: {{ .Values.service.internalPort }}
+    name: http
