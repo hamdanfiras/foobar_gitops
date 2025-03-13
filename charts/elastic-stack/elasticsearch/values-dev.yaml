@@ -16,7 +16,7 @@ discovery:
   type: single-node
 
 storage:
-  storageClass: "" # Use default storage class if not set
+  storageClass: "standard" # Use default storage class if not set
   size: 10Gi
 
 resources: {}
