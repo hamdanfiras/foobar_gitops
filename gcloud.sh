@@ -43,7 +43,7 @@ argocd login "localhost:8086" --username admin --password $password --insecure
 
 argocd repo add https://github.com/hamdanfiras/foobar_gitops --username hamdanfiras --password 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
 
-kubectl apply -f ./apps/root-dev.yml
+kubectl apply -f ./apps/root-dev.yml  
 
 
 

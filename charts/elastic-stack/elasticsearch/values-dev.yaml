@@ -33,11 +33,11 @@ esConfig:
     name: "foobar"
     initial_master_nodes:
       [
-        "elasticsearch-elasticsearch-0",
-        "elasticsearch-elasticsearch-1",
-        "elasticsearch-elasticsearch-2",
+        "elasticsearch-elasticsearch-0.elasticsearch-headless.logging-dev.svc.cluster.local",
+        "elasticsearch-elasticsearch-1.elasticsearch-headless.logging-dev.svc.cluster.local",
+        "elasticsearch-elasticsearch-2.elasticsearch-headless.logging-dev.svc.cluster.local",
       ]
   discovery:
-    seed_hosts: "elasticsearch-elasticsearch-0,elasticsearch-elasticsearch-1,elasticsearch-elasticsearch-2"
+    seed_hosts: "elasticsearch-elasticsearch-0.elasticsearch-headless.logging-dev.svc.cluster.local,elasticsearch-elasticsearch-1.elasticsearch-headless.logging-dev.svc.cluster.local,elasticsearch-elasticsearch-2.elasticsearch-headless.logging-dev.svc.cluster.local,"
   security:
     enabled: false
