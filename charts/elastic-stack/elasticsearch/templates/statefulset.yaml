@@ -13,6 +13,9 @@ spec:
       labels:
         app: {{ include "elasticsearch.name" . }}
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 0
       containers:
         - name: elasticsearch
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -33,15 +36,10 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
   volumeClaimTemplates:
     - metadata:
-      name: storage
+        name: storage
       spec:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: {{ .Values.storage.storageClass | quote }}
-      resources:
-        requests:
-        storage: {{ .Values.storage.size }}
-    - template:
-      spec:
-        securityContext:
-        runAsUser: 1000
-        runAsGroup: 0
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: {{ .Values.storage.storageClass | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.storage.size }}
