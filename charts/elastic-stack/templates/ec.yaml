@@ -22,6 +22,19 @@ spec:
   elasticsearchRefs:
     - clusterName: eck
       name: elasticsearch
+  podTemplate:
+    spec:
+      containers:
+        - name: logstash
+          env:
+            - name: ECK_ES_HOSTS
+              value: "http://elasticsearch:9200"  # update with your Elasticsearch host(s)
+            - name: ECK_ES_USER
+              value: "elastic"                   # update with your username
+            - name: ECK_ES_PASSWORD
+              value: "1mt69b9tn4sNlL3eP97RCM09"                  # update with your password
+            - name: ECK_ES_SSL_CERTIFICATE_AUTHORITY
+              value: "/usr/share/logstash/config/certs/ca.crt"  # update with the correct CA certificate path
   monitoring:
     metrics:
       elasticsearchRefs:
