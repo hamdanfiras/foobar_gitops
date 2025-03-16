@@ -41,13 +41,3 @@ spec:
             ssl_certificate_authorities => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}"
           }
         }
-  services:
-    - name: beats
-      service:
-        spec:
-          type: ClusterIP
-          ports:
-            - port: 5044
-              name: "filebeat"
-              protocol: TCP
-              targetPort: 5044
