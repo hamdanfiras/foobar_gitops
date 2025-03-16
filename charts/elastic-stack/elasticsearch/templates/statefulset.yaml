@@ -28,14 +28,20 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: /usr/share/elasticsearch/data
+              readOnly: false
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
   volumeClaimTemplates:
     - metadata:
-        name: storage
+      name: storage
       spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: {{ .Values.storage.storageClass | quote }}
-        resources:
-          requests:
-            storage: {{ .Values.storage.size }}
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: {{ .Values.storage.storageClass | quote }}
+      resources:
+        requests:
+        storage: {{ .Values.storage.size }}
+    template:
+    spec:
+      securityContext:
+      runAsUser: 1000
+      runAsGroup: 0
