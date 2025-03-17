@@ -8,9 +8,6 @@ spec:
   nodeSets:
     - name: default
       count: 1
-      config:
-        # This setting has performance implications. See the README for more details.
-        node.store.allow_mmap: false
   transport:
     tls:
       enabled: false
