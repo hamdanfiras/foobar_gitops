@@ -26,6 +26,13 @@ spec:
     spec:
       containers:
         - name: logstash
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
           env:
             - name: ECK_ES_HOSTS
               value: "http://elasticsearch:9200"  # update with your Elasticsearch host(s)
