@@ -53,17 +53,19 @@ spec:
       securityContext:
         runAsUser: 1000 #Very important, logstash runs as 1000 user
   pipelines:
-    - pipeline.id: main
-      config.string: |
+  - pipeline.id: main
+    config.string: |
+      input {
         tcp {
           port => 5044
           codec => json
         }
-        output {
-          elasticsearch {
-            hosts => [ "${ECK_ES_HOSTS}" ]
-            user => "${ECK_ES_USER}"
-            password => "${ECK_ES_PASSWORD}"
-            ssl_certificate_authorities => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}"
-          }
+      }
+      output {
+        elasticsearch {
+          hosts => [ "${ECK_ES_HOSTS}" ]
+          user => "${ECK_ES_USER}"
+          password => "${ECK_ES_PASSWORD}"
+          ssl_certificate_authorities => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}"
         }
+      }
