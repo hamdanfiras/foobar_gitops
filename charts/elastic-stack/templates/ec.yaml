@@ -12,6 +12,16 @@ spec:
         # This setting has performance implications. See the README for more details.
         node.store.allow_mmap: false
 ---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+spec:
+  version: 8.16.0
+  count: 1
+  elasticsearchRef:
+    name: elasticsearch
+---
 apiVersion: logstash.k8s.elastic.co/v1alpha1
 kind: Logstash
 metadata:
