@@ -39,10 +39,7 @@ spec:
             - name: ECK_ES_USER
               value: "elastic"
             - name: ECK_ES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: elastic-credentials
-                  key: password
+              value: "6i006g6zrx76k8OR6TQjB5oW"
             - name: ECK_ES_SSL_CERTIFICATE_AUTHORITY
               value: "/usr/share/logstash/config/certs/ca.crt"
             - name: LOGSTASH_SETTINGS

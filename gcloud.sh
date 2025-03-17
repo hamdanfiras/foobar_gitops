@@ -73,3 +73,7 @@ kubectl port-forward service/kibana 8087:5601
 
 
 kubectl port-forward service/kibana 8087:5601 -n logging-dev  &> /dev/null &
+
+
+#elastic search secret
+ kubectl get secret -n logging-dev elasticsearch-es-elastic-user -o jsonpath='{.data.elastic}' | base64 --decode
