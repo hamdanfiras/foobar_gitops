@@ -8,6 +8,9 @@ spec:
   nodeSets:
     - name: default
       count: 1
+      config:
+        # This setting has performance implications. See the README for more details.
+        node.store.allow_mmap: false
 ---
 apiVersion: logstash.k8s.elastic.co/v1alpha1
 kind: Logstash
