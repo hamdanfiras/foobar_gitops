@@ -43,7 +43,7 @@ spec:
             - name: ECK_ES_SSL_CERTIFICATE_AUTHORITY
               value: "/usr/share/logstash/config/certs/ca.crt"
             - name: LOGSTASH_SETTINGS
-              value: "http.host: 0.0.0.0\nhttp.enabled: true" #enable http monitoring
+              value: "http.host: 0.0.0.0\nhttp.port: 9600\nhttp.enabled: true" #enable http monitoring
           readinessProbe:
             httpGet:
               path: "/"
