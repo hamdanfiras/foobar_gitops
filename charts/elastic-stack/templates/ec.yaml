@@ -20,7 +20,7 @@ spec:
   count: 1
   version: 8.16.0
   elasticsearchRefs:
-    - clusterName: eck
+    - clusterName: elastic-system #Or default, or whatever namespace you are using.
       name: elasticsearch
   podTemplate:
     spec:
@@ -35,13 +35,26 @@ spec:
               memory: "512Mi"
           env:
             - name: ECK_ES_HOSTS
-              value: "http://elasticsearch:9200"  # update with your Elasticsearch host(s)
+              value: "http://elasticsearch:9200"
             - name: ECK_ES_USER
-              value: "elastic"                   # update with your username
+              value: "elastic"
             - name: ECK_ES_PASSWORD
-              value: "1mt69b9tn4sNlL3eP97RCM09"                  # update with your password
+              valueFrom:
+                secretKeyRef:
+                  name: elastic-credentials
+                  key: password
             - name: ECK_ES_SSL_CERTIFICATE_AUTHORITY
-              value: "/usr/share/logstash/config/certs/ca.crt"  # update with the correct CA certificate path
+              value: "/usr/share/logstash/config/certs/ca.crt"
+            - name: LOGSTASH_SETTINGS
+              value: "http.host: 0.0.0.0\nhttp.enabled: true" #enable http monitoring
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: 9600
+            initialDelaySeconds: 10
+            periodSeconds: 10
+      securityContext:
+        runAsUser: 1000 #Very important, logstash runs as 1000 user
   pipelines:
     - pipeline.id: main
       config.string: |
