@@ -8,9 +8,6 @@ spec:
   nodeSets:
     - name: default
       count: 1
-  transport:
-    tls:
-      enabled: false
 ---
 apiVersion: logstash.k8s.elastic.co/v1alpha1
 kind: Logstash
@@ -35,7 +32,7 @@ spec:
               memory: "1Gi"
           env:
             - name: ECK_ES_HOSTS
-              value: "http://elasticsearch:9200"
+              value: "https://elasticsearch-es-http:9200" # Updated to HTTPS
             - name: ECK_ES_USER
               value: "elastic"
             - name: ECK_ES_PASSWORD
@@ -44,6 +41,10 @@ spec:
               value: "/usr/share/logstash/config/certs/ca.crt"
             - name: LOGSTASH_SETTINGS
               value: "http.host: 0.0.0.0\nhttp.port: 9600\nhttp.enabled: true" #enable http monitoring
+          volumeMounts:
+            - name: elastic-ca
+              mountPath: /usr/share/logstash/config/certs
+              readOnly: true
           readinessProbe:
             httpGet:
               path: "/"
@@ -52,6 +53,10 @@ spec:
             periodSeconds: 10
       securityContext:
         runAsUser: 1000 #Very important, logstash runs as 1000 user
+      volumes:
+        - name: elastic-ca
+          secret:
+            secretName: elasticsearch-es-http-certs-public
   pipelines:
   - pipeline.id: main
     config.string: |
@@ -66,5 +71,7 @@ spec:
           hosts => [ "${ECK_ES_HOSTS}" ]
           user => "${ECK_ES_USER}"
           password => "${ECK_ES_PASSWORD}"
+          ssl => true
+          cacert => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}"
         }
       }
