@@ -72,6 +72,18 @@ spec:
         - name: elastic-ca
           secret:
             secretName: elasticsearch-es-http-certs-public
+  service: # Add this section to create a ClusterIP service
+    spec:
+      type: ClusterIP
+      ports:
+        - name: tcp-5044
+          port: 5044
+          protocol: TCP
+          targetPort: 5044
+        - name: http-9600
+          port: 9600
+          protocol: TCP
+          targetPort: 9600
   pipelines:
     - pipeline.id: main
       config.string: |
@@ -91,15 +103,3 @@ spec:
             index => "spring-boot-logs-%{+YYYY.MM.dd}"
           }
         }
-  service: # Add this section to create a ClusterIP service
-    spec:
-      type: ClusterIP
-      ports:
-        - name: tcp-5044
-          port: 5044
-          protocol: TCP
-          targetPort: 5044
-        - name: http-9600
-          port: 9600
-          protocol: TCP
-          targetPort: 9600
