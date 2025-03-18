@@ -38,12 +38,9 @@ podAnnotations: {}
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
-podSecurityContext:
-  {}
-  # fsGroup: 2000
+podSecurityContext: {} # fsGroup: 2000
 
-securityContext:
-  {}
+securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -62,22 +59,20 @@ service:
 ingress:
   enabled: false
   className: ""
-  annotations:
-    {}
+  annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  - host: chart-example.local
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
-resources:
-  {}
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -107,7 +102,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# Additional volumes on the output Deployment definition.
+  # Additional volumes on the output Deployment definition.
 volumes: []
 # - name: foo
 #   secret:
@@ -127,9 +122,9 @@ tolerations: []
 affinity: {}
 
 env:
-  - name: SERVER_PORT
-    value: "80"
-  - name: FOO_URL
-    value: "http://foo-dev"
-  - name: LOGSTASH_URL
-    value: "logstash-ls-api.logging-dev.svc.cluster.local:9600"
+- name: SERVER_PORT
+  value: "80"
+- name: FOO_URL
+  value: "http://foo-dev"
+- name: LOGSTASH_URL
+  value: "logstash.logging-dev.svc.cluster.local:9600"
