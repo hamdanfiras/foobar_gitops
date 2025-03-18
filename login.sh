@@ -12,10 +12,10 @@ sleep 2
 
 
 password=$(kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d) && echo "ArgoCD initial admin password: $password"
-sleep 1
+sleep 2
 kubectl port-forward svc/argocd-server -n argocd 8086:443 &> /dev/null &
 
 
-sleep 2
+sleep 3
 
 argocd login "localhost:8086" --username admin --password $password --insecure 
