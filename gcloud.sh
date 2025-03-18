@@ -71,9 +71,8 @@ kubectl port-forward svc/argocd-server -n argocd 8087:443 &
 
 kubectl port-forward service/kibana 8087:5601
 
-
-kubectl port-forward service/kibana 8087:5601 -n logging-dev  &> /dev/null &
-
+#KIBANA 
+kubectl port-forward -n logging-dev service/kibana-kb-http 5601:5601  &> /dev/null &
 
 #elastic search secret
  kubectl get secret -n logging-dev elasticsearch-es-elastic-user -o jsonpath='{.data.elastic}' | base64 --decode
