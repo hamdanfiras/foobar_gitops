@@ -30,7 +30,7 @@ spec:
   count: 1
   version: 8.16.0
   elasticsearchRefs:
-    - clusterName: elastic-system #Or default, or whatever namespace you are using.
+    - clusterName: elastic-system
       name: elasticsearch
   podTemplate:
     spec:
@@ -45,7 +45,7 @@ spec:
               memory: "1Gi"
           env:
             - name: ECK_ES_HOSTS
-              value: "https://elasticsearch-es-http:9200" # Updated to HTTPS
+              value: "https://elasticsearch-es-http:9200"
             - name: ECK_ES_USER
               value: "elastic"
             - name: ECK_ES_PASSWORD
@@ -53,7 +53,7 @@ spec:
             - name: ECK_ES_SSL_CERTIFICATE_AUTHORITY
               value: "/usr/share/logstash/config/certs/ca.crt"
             - name: LOGSTASH_SETTINGS
-              value: "http.host: 0.0.0.0\nhttp.port: 9600\nhttp.enabled: true" #enable http monitoring
+              value: "http.host: 0.0.0.0\nhttp.port: 9600\nhttp.enabled: true"
           volumeMounts:
             - name: elastic-ca
               mountPath: /usr/share/logstash/config/certs
@@ -66,28 +66,40 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 10
       securityContext:
-        runAsUser: 1000 #Very important, logstash runs as 1000 user
+        runAsUser: 1000
         fsGroup: 1000
       volumes:
         - name: elastic-ca
           secret:
             secretName: elasticsearch-es-http-certs-public
   pipelines:
-  - pipeline.id: main
-    config.string: |
-      input {
-        tcp {
-          port => 5044
-          codec => json
+    - pipeline.id: main
+      config.string: |
+        input {
+          tcp {
+            port => 5044
+            codec => json
+          }
         }
-      }
-      output {
-        elasticsearch {
-          hosts => [ "${ECK_ES_HOSTS}" ]
-          user => "${ECK_ES_USER}"
-          password => "${ECK_ES_PASSWORD}"
-          ssl => true
-          cacert => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}"
-          index => "spring-boot-logs-%{+YYYY.MM.dd}"
+        output {
+          elasticsearch {
+            hosts => [ "${ECK_ES_HOSTS}" ]
+            user => "${ECK_ES_USER}"
+            password => "${ECK_ES_PASSWORD}"
+            ssl => true
+            cacert => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}"
+            index => "spring-boot-logs-%{+YYYY.MM.dd}"
+          }
         }
-      }
+  service: # Add this section to create a ClusterIP service
+    spec:
+      type: ClusterIP
+      ports:
+        - name: tcp-5044
+          port: 5044
+          protocol: TCP
+          targetPort: 5044
+        - name: http-9600
+          port: 9600
+          protocol: TCP
+          targetPort: 9600
