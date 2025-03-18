@@ -67,6 +67,7 @@ spec:
             periodSeconds: 10
       securityContext:
         runAsUser: 1000 #Very important, logstash runs as 1000 user
+        fsGroup: 1000
       volumes:
         - name: elastic-ca
           secret:
