@@ -87,7 +87,7 @@ spec:
           user => "${ECK_ES_USER}"
           password => "${ECK_ES_PASSWORD}"
           ssl => true
-          cacert => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}",
+          cacert => "${ECK_ES_SSL_CERTIFICATE_AUTHORITY}"
           index => "spring-boot-logs-%{+YYYY.MM.dd}"
         }
       }
