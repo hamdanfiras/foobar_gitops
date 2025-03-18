@@ -127,4 +127,4 @@ env:
 - name: FOO_URL
   value: "http://foo-dev"
 - name: LOGSTASH_URL
-  value: "logstash.logging-dev.svc.cluster.local:9600"
+  value: "logstash.logging-dev.svc.cluster.local:5044"
