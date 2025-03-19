@@ -49,7 +49,7 @@ spec:
             - name: ECK_ES_USER
               value: "elastic"
             - name: ECK_ES_PASSWORD
-              value: "62372PrVXBWf612o9g2AQukJ"
+              value: "qAQ89eYG6481J2JeiB2y82FR"
             - name: ECK_ES_SSL_CERTIFICATE_AUTHORITY
               value: "/usr/share/logstash/config/certs/ca.crt"
             - name: LOGSTASH_SETTINGS
